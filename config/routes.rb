@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :admins, controllers: {
-    namespace :admins do
-      resources :healths
-    end
+  namespace :users do
+    resources :healths
+  end
 
+  namespace :admins do
+    resources :healths
+  end
+
+  devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
     registrations: 'admins/registrations'
