@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_125001) do
+ActiveRecord::Schema.define(version: 2021_06_10_151450) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,25 @@ ActiveRecord::Schema.define(version: 2021_06_10_125001) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "healths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "date", null: false
+    t.decimal "temperature_morning", precision: 3, scale: 1
+    t.decimal "temperature_night", precision: 3, scale: 1
+    t.string "cough"
+    t.string "dyspnea"
+    t.string "nasal"
+    t.string "throat"
+    t.string "headache"
+    t.string "diarrhea"
+    t.string "taste"
+    t.string "smell"
+    t.text "ather"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_healths_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -36,4 +55,5 @@ ActiveRecord::Schema.define(version: 2021_06_10_125001) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "healths", "users"
 end
