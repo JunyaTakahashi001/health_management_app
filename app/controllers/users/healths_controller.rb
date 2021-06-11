@@ -3,7 +3,7 @@ class Users::HealthsController < Users::ApplicationController
 
   # GET /users/healths or /users/healths.json
   def index
-    @users_healths = Users::Health.all
+    @users_healths = Health.all
   end
 
   # GET /users/healths/1 or /users/healths/1.json
