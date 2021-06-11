@@ -3,7 +3,10 @@ class Admins::HealthsController < Admins::ApplicationController
 
   # GET /admins/healths or /admins/healths.json
   def index
-    @admins_healths = Health.all
+    # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
+    @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
+    # 取得した時刻が含まれる日の範囲のデータを取得
+    @admins_healths = Health.where(date: @month.all_day).order('date ASC')
   end
 
   # GET /admins/healths/1 or /admins/healths/1.json

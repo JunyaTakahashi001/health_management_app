@@ -3,6 +3,7 @@
 <div class="d-flex align-items-center">
   <h1><%= @month.year %> 年 <%= @month.month %>月 健康状態登録一覧</h1>
   <div class="ml-auto">
+    <%= link_to '登録', new_users_health_path, class: 'btn btn-outline-dark' %>
     <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark' %>
   </div>
 </div>
@@ -64,7 +65,3 @@
     </tbody>
   </div>
 </div>
-
-<br>
-
-<%= link_to 'New Users Health', new_users_health_path %>
