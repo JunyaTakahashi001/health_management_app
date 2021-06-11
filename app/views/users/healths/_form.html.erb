@@ -1,5 +1,5 @@
-<%= form_with(model: users_health, local: true) do |form| %>
-  <% if users_health.errors.any? %>
+<%= form_with(model: users_health, local: true) do |f| %>
+  <% if @health.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(users_health.errors.count, "error") %> prohibited this users_health from being saved:</h2>
 
@@ -11,7 +11,100 @@
     </div>
   <% end %>
 
+  <div class="form-group">
+    <%= f.label :date, '日付' %>
+    <%= f.date_field :date, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :temperature_morning, '体温（朝）' %>
+    <%= f.text_field :temperature_morning, :size=>"5" %> 度
+  </div>
+  <div class="form-group">
+    <%= f.label :temperature_night, '体温（夕）' %>
+    <%= f.text_field :temperature_night, :size=>"5" %> 度
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+        <%= f.label :cough, '咳嗽', {class: 'form-label'} %>
+    </div>
+    <div class="col-sm-10">
+        <%= f.radio_button :cough, "あり", {} %> あり
+        <%= f.radio_button :cough, "なし", {} %> なし
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+        <%= f.label :dyspnea, '呼吸困難', {class: 'form-label'} %>
+    </div>
+    <div class="col-sm-10">
+        <%= f.radio_button :dyspnea, "あり", {} %> あり
+        <%= f.radio_button :dyspnea, "なし", {} %> なし
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+        <%= f.label :nasal, '鼻汁・鼻閉', {class: 'form-label'} %>
+    </div>
+    <div class="col-sm-10">
+        <%= f.radio_button :nasal, "あり", {} %> あり
+        <%= f.radio_button :nasal, "なし", {} %> なし
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+        <%= f.label :throat, '咽頭痛', {class: 'form-label'} %>
+    </div>
+    <div class="col-sm-10">
+        <%= f.radio_button :throat, "あり", {} %> あり
+        <%= f.radio_button :throat, "なし", {} %> なし
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+        <%= f.label :headache, '頭痛', {class: 'form-label'} %>
+    </div>
+    <div class="col-sm-10">
+        <%= f.radio_button :headache, "あり", {} %> あり
+        <%= f.radio_button :headache, "なし", {} %> なし
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+        <%= f.label :diarrhea, '下痢', {class: 'form-label'} %>
+    </div>
+    <div class="col-sm-10">
+        <%= f.radio_button :diarrhea, "あり", {} %> あり
+        <%= f.radio_button :diarrhea, "なし", {} %> なし
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+        <%= f.label :taste, '味覚異常', {class: 'form-label'} %>
+    </div>
+    <div class="col-sm-10">
+        <%= f.radio_button :taste, "あり", {} %> あり
+        <%= f.radio_button :taste, "なし", {} %> なし
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+        <%= f.label :smell, '嗅覚異常', {class: 'form-label'} %>
+    </div>
+    <div class="col-sm-10">
+        <%= f.radio_button :smell, "あり", {} %> あり
+        <%= f.radio_button :smell, "なし", {} %> なし
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :ather, 'その他' %>
+    <%= f.text_field :ather, :size=>"50" %>
+  </div>
+  <%# ユーザーID %>
+  <div class="form-group">
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit '登録', class: 'btn btn-primary' %>
   </div>
 <% end %>

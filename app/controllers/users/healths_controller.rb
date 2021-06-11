@@ -14,7 +14,7 @@ class Users::HealthsController < Users::ApplicationController
 
   # GET /users/healths/new
   def new
-    @users_health = Users::Health.new
+    @health = Health.new
   end
 
   # GET /users/healths/1/edit
