@@ -36,9 +36,18 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# 認証機能
 gem 'devise'
 gem 'devise-i18n'
 
+gem 'bootstrap', '~> 4.0.0'
+gem 'mini_racer'
+
+# エラーメッセージ日本語化
+gem 'rails-i18n'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
