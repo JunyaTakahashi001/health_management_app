@@ -16,9 +16,9 @@
   <tbody>
     <% @admins_healths.each do |admins_health| %>
       <tr>
-        <td><%= link_to 'Show', admins_health %></td>
+        <td><%= link_to 'Show', [:admins, admins_health] %></td>
         <td><%= link_to 'Edit', edit_admins_health_path(admins_health) %></td>
-        <td><%= link_to 'Destroy', admins_health, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', [:admins, admins_health], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
