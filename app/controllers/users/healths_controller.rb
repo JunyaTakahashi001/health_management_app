@@ -3,7 +3,9 @@ class Users::HealthsController < Users::ApplicationController
 
   # GET /users/healths or /users/healths.json
   def index
-    @users_healths = Health.all
+    # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
+    @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
+    @users_healths = Health.where(date: @month.all_month).where(user_id: current_user.id).order('date ASC')
   end
 
   # GET /users/healths/1 or /users/healths/1.json

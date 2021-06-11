@@ -6,24 +6,51 @@
   <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-dark' %>
  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @admins_healths.each do |admins_health| %>
+<div class='index'>
+ <div class='col-mid-12'>
+  <table class="table table-striped">
+    <thead class="thead-light">
       <tr>
-        <td><%= link_to 'Show', [:admins, admins_health] %></td>
-        <td><%= link_to 'Edit', edit_admins_health_path(admins_health) %></td>
-        <td><%= link_to 'Destroy', [:admins, admins_health], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>日付</th>
+        <th>体温（朝）</th>
+        <th>体温（夕）</th>
+        <th>咳嗽</th>
+        <th>呼吸困難</th>
+        <th>鼻汁・鼻閉</th>
+        <th>咽頭痛</th>
+        <th>頭痛</th>
+        <th>下痢</th>
+        <th>味覚異常</th>
+        <th>嗅覚異常</th>
+        <th>その他</th>
+        <th>更新</th>
+        <th>行動記録</th>
+        <th>更新</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @admins_healths.each do |admins_health| %>
+        <tr>
+          <td><%= health.date.day %>日</td>
+          <td><%= health.temperature_morning %></td>
+          <td><%= health.temperature_night %></td>
+          <td><%= health.cough %></td>
+          <td><%= health.dyspnea %></td>
+          <td><%= health.nasal %></td>
+          <td><%= health.throat %></td>
+          <td><%= health.headache %></td>
+          <td><%= health.diarrhea %></td>
+          <td><%= health.taste %></td>
+          <td><%= health.smell %></td>
+          <td><%= health.ather %></td>
+          <td><%= link_to 'Show', [:admins, admins_health] %></td>
+          <td><%= link_to 'Edit', edit_admins_health_path(admins_health) %></td>
+          <td><%= link_to 'Destroy', [:admins, admins_health], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </div>
+</div>
 
 <%= link_to 'New Admins Health', new_admins_health_path %>
