@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_092707) do
+ActiveRecord::Schema.define(version: 2021_06_12_140454) do
+
+  create_table "actlogs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "date", null: false
+    t.integer "renge", null: false
+    t.time "start_time"
+    t.time "end_time"
+    t.string "destination"
+    t.string "transportation"
+    t.string "departure"
+    t.string "arrival"
+    t.string "attendees"
+    t.string "attendees_details"
+    t.text "other"
+    t.bigint "user_id"
+    t.bigint "health_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["health_id"], name: "index_actlogs_on_health_id"
+    t.index ["user_id"], name: "index_actlogs_on_user_id"
+  end
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -55,5 +75,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_092707) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "actlogs", "healths"
+  add_foreign_key "actlogs", "users"
   add_foreign_key "healths", "users"
 end

@@ -1,0 +1,2 @@
+module Users::ActlogsHelper
+end

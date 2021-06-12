@@ -1,0 +1,2 @@
+class Actlog < ApplicationRecord
+end

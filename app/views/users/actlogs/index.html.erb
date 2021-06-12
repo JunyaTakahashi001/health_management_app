@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users Actlogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users_actlogs.each do |users_actlog| %>
+      <tr>
+        <td><%= link_to 'Show', users_actlog %></td>
+        <td><%= link_to 'Edit', edit_users_actlog_path(users_actlog) %></td>
+        <td><%= link_to 'Destroy', users_actlog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Users Actlog', new_users_actlog_path %>
