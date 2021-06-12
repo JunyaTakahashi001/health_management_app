@@ -14,20 +14,22 @@ class Users::HealthsController < Users::ApplicationController
 
   # GET /users/healths/new
   def new
+    @path = users_healths_path
     @health = Health.new
   end
 
   # GET /users/healths/1/edit
   def edit
+    @health.attributes = flash[:health] if flash[:health]
+    @path = "/users/healths/#{@health[:id]}"
   end
 
   # POST /users/healths or /users/healths.json
   def create
-    
     @health = Health.new(health_params)
     respond_to do |format|
-      if @health.save
-        format.html { redirect_to @users_healths_path, notice: "Health was successfully created." }
+      if @users_health.save
+        format.html { redirect_to users_healths_path, notice: "Health was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -37,12 +39,10 @@ class Users::HealthsController < Users::ApplicationController
   # PATCH/PUT /users/healths/1 or /users/healths/1.json
   def update
     respond_to do |format|
-      if @users_health.update(users_health_params)
-        format.html { redirect_to @users_health, notice: "Health was successfully updated." }
-        format.json { render :show, status: :ok, location: @users_health }
+      if @health.update(health_params)
+        format.html { redirect_to users_healths_path, notice: "Health was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @users_health.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,7 +59,7 @@ class Users::HealthsController < Users::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_users_health
-      @users_health = Users::Health.find(params[:id])
+      @health = Health.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

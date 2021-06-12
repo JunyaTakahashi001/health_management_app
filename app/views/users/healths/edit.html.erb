@@ -1,6 +1,10 @@
-<h1>Editing Users Health</h1>
+<div class="d-flex align-items-center">
+  <h1>健康状態編集</h1>
+  <div class="ml-auto">
+    <%= link_to '一覧へ戻る', users_healths_path, class: 'btn btn-outline-dark' %>
+  </div>
+</div>
 
-<%= render 'form', users_health: @users_health %>
+<p>氏名：<%= current_user.email %></p>
 
-<%= link_to 'Show', @users_health %> |
-<%= link_to 'Back', users_healths_path %>
+<%= render partial: 'form', locals: {health: @health} %>

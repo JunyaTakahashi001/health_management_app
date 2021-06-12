@@ -1,4 +1,4 @@
-<%= form_with(model: @health, local: true, url: users_healths_path)  do |f| %>
+<%= form_with(model: @health, local: true, url: @path)  do |f| %>
   <% if @health.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(users_health.errors.count, "error") %> prohibited this users_health from being saved:</h2>
