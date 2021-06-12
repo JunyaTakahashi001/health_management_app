@@ -7,4 +7,4 @@
 
 <p>氏名：<%= current_user.email %></p>
 
-<%= render 'form', users_health: @users_health %>
+<%= render partial: 'form', locals: {users_health: @users_health} %>

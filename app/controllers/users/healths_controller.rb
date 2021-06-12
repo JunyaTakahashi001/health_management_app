@@ -23,15 +23,13 @@ class Users::HealthsController < Users::ApplicationController
 
   # POST /users/healths or /users/healths.json
   def create
-    @users_health = Users::Health.new(users_health_params)
-
+    
+    @health = Health.new(health_params)
     respond_to do |format|
-      if @users_health.save
-        format.html { redirect_to @users_health, notice: "Health was successfully created." }
-        format.json { render :show, status: :created, location: @users_health }
+      if @health.save
+        format.html { redirect_to @users_healths_path, notice: "Health was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @users_health.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,7 +63,7 @@ class Users::HealthsController < Users::ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def users_health_params
-      params.fetch(:users_health, {})
+    def health_params
+      params.require(:health).permit(:date, :temperature_morning, :temperature_night, :cough, :dyspnea, :nasal, :throat, :headache, :diarrhea, :taste, :smell, :ather, :user_id)
     end
 end
