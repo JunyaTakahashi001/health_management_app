@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :healths
+    resources :personal_healths
   end
 
   devise_for :admins, controllers: {

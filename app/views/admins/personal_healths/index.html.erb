@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<div class="d-flex align-items-center">
+  <h1><%= @month.year %> 年 <%= @month.month %>月 <%= @month.day %>日 管理者用 個人別健康状態一覧</h1>
+  <div class="ml-auto">
+    <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-dark' %>
+  </div>
+</div>
+
+<% if flash[:notice] %>
+  <div class="alert alert-primary"><%= flash[:notice] %></div>
+<% end %>
+<div>
+  <p>氏名：<%=  %></p>
+  <%= link_to "<前月", admins_personal_healths_path(month:@month.prev_month) %>
+  <%= link_to "翌月>", admins_personal_healths_path(month:@month.next_month) %>
+  <br>
+  <%= link_to "<前日", admins_personal_healths_path(month:@month.yesterday) %>
+  <%= link_to "翌日>", admins_personal_healths_path(month:@month.tomorrow) %>
+</div>
+
+<div class='index'>
+ <div class='col-mid-12'>
+  <table class="table table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th>氏名</th>
+        <th>体温（朝）</th>
+        <th>体温（夕）</th>
+        <th>咳嗽</th>
+        <th>呼吸困難</th>
+        <th>鼻汁・鼻閉</th>
+        <th>咽頭痛</th>
+        <th>頭痛</th>
+        <th>下痢</th>
+        <th>味覚異常</th>
+        <th>嗅覚異常</th>
+        <th>その他</th>
+        <th>詳細</th>
+        <th>行動記録</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @admins_personal_healths.each do |admins_personal_health| %>
+        <tr>
+          <td><%= admins_personal_health.user_id %></td>
+          <td><%= admins_personal_health.temperature_morning %></td>
+          <td><%= admins_personal_health.temperature_night %></td>
+          <td><%= admins_personal_health.cough %></td>
+          <td><%= admins_personal_health.dyspnea %></td>
+          <td><%= admins_personal_health.nasal %></td>
+          <td><%= admins_personal_health.throat %></td>
+          <td><%= admins_personal_health.headache %></td>
+          <td><%= admins_personal_health.diarrhea %></td>
+          <td><%= admins_personal_health.taste %></td>
+          <td><%= admins_personal_health.smell %></td>
+          <td><%= admins_personal_health.ather %></td>
+          <td></td>
+          <td></td>
+          <%# link_to 'Show', admins_personal_health %>
+          <%# link_to 'Edit', edit_admins_personal_health_path(admins_personal_health) %>
+          <%# link_to 'Destroy', admins_personal_health, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </tr>
+      <% end %>
+    </tbody>
+  </div>
+</div>
