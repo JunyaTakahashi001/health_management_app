@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :users do
     resources :healths
-    resources :actlog
+    resources :actlogs
   end
 
   namespace :admins do

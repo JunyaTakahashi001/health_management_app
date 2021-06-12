@@ -1,25 +1,83 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users Actlogs</h1>
+<div class="d-flex align-items-center">
+  <h1><%= @month.year %> 年 <%= @month.month %>月 <%= @month.day %>日 行動履歴登録一覧</h1>
+  <div class="ml-auto">
+    <%= link_to '登録', new_users_actlog_path, class: 'btn btn-outline-dark' %>
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark' %>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% if flash[:notice] %>
+  <div class="alert alert-primary"><%= flash[:notice] %></div>
+<% end %>
+<div>
+  <p>氏名：<%= current_user.email %></p>
+  <%= link_to "<前月", users_actlogs_path(month:@month.prev_month) %>
+  <%= link_to "次月>", users_actlogs_path(month:@month.next_month) %>
+  <br>
+  <%= link_to "<前日", users_actlogs_path(month:@month.yesterday) %>
+  <%= link_to "翌日>", users_actlogs_path(month:@month.tomorrow) %>
+</div>
 
-  <tbody>
-    <% @users_actlogs.each do |users_actlog| %>
+<div class='index'>
+ <div class='col-mid-12'>
+  <table class="table table-striped">
+    <thead class="thead-light">
       <tr>
-        <td><%= link_to 'Show', users_actlog %></td>
-        <td><%= link_to 'Edit', edit_users_actlog_path(users_actlog) %></td>
-        <td><%= link_to 'Destroy', users_actlog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>No</th>
+        <th>開始</th>
+        <th>終了</th>
+        <th>行先</th>
+        <th>移動方法</th>
+        <th>出発地</th>
+        <th>到着地</th>
+        <th>同行者</th>
+        <th>詳細</th>
+        <th>特記事項</th>
+        <th>更新</th>
+        <th>削除</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @users_actlogs.each do |users_actlog| %>
+        <tr>
+          <td><%= users_actlog.date %></td>
+          <td><%= users_actlog.start_time %></td>
+          <td><%= users_actlog.end_time %></td>
+          <td><%= users_actlog.destination %></td>
+          <td><%= users_actlog.transportation %></td>
+          <td><%= users_actlog.departure %></td>
+          <td><%= users_actlog.arrival %></td>
+          <td><%= users_actlog.attendees %></td>
+          <td><%= users_actlog.attendees_details %></td>
+          <td><%= users_actlog.other %></td>
+          <td></td>
+          <td></td>
+          <%# link_to 'Show', users_actlog %>
+          <%# link_to 'Edit', edit_users_actlog_path(users_actlog) %>
+          <%# link_to 'Destroy', users_actlog, method: :delete, data: { confirm: 'Are you sure?' } %>    
+        </tr>
+      <% end %>
+    </tbody>
+  </div>
+</div>
 
-<%= link_to 'New Users Actlog', new_users_actlog_path %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

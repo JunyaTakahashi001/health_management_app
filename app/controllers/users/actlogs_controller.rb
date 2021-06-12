@@ -3,7 +3,9 @@ class Users::ActlogsController < Users::ApplicationController
 
   # GET /users/actlogs or /users/actlogs.json
   def index
-    @users_actlogs = Users::Actlog.all
+    # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
+    @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
+    @users_actlogs = Actlog.where(health_id: 1).where(user_id: current_user.id).order('date ASC')
   end
 
   # GET /users/actlogs/1 or /users/actlogs/1.json
