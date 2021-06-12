@@ -3,6 +3,7 @@
 <div class="d-flex align-items-center">
   <h1><%= @month.year %> 年 <%= @month.month %>月 <%= @month.day %>日 管理者用 日別健康状態一覧</h1>
   <div class="ml-auto">
+    <%= link_to '個人別健康状態一覧', admins_personal_healths_path, class: 'btn btn-outline-dark' %>
     <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-dark' %>
   </div>
 </div>

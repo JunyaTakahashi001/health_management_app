@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <div class="d-flex align-items-center">
-  <h1><%= @month.year %> 年 <%= @month.month %>月 <%= @month.day %>日 管理者用 個人別健康状態一覧</h1>
+  <h1><%= @month.year %> 年 <%= @month.month %>月 管理者用 個人別健康状態一覧</h1>
   <div class="ml-auto">
+    <%= link_to '日別健康状態一覧', admins_healths_path, class: 'btn btn-outline-dark' %>
     <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-dark' %>
   </div>
 </div>
@@ -57,6 +58,7 @@
           <td><%= admins_personal_health.taste %></td>
           <td><%= admins_personal_health.smell %></td>
           <td><%= admins_personal_health.ather %></td>
+          <td></td>
           <td></td>
           <td></td>
           <%# link_to 'Show', admins_personal_health %>

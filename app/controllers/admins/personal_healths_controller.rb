@@ -6,7 +6,7 @@ class Admins::PersonalHealthsController < Admins::ApplicationController
     # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     # 取得した時刻が含まれる日の範囲のデータを取得
-    @admins_personal_healths = Health.where(date: @month.all_day).where(user_id: 1).order('date ASC')
+    @admins_personal_healths = Health.where(date: @month.all_month).where(user_id: 1).order('date ASC')
   end
 
   # GET /admins/personal_healths/1 or /admins/personal_healths/1.json
