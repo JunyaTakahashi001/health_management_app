@@ -28,7 +28,7 @@ class Users::HealthsController < Users::ApplicationController
   def create
     @health = Health.new(health_params)
     respond_to do |format|
-      if @users_health.save
+      if @health.save
         format.html { redirect_to users_healths_path, notice: "Health was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
