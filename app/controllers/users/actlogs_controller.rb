@@ -14,7 +14,8 @@ class Users::ActlogsController < Users::ApplicationController
 
   # GET /users/actlogs/new
   def new
-    @users_actlog = Users::Actlog.new
+    @path = users_actlogs_path
+    @actlog = Actlog.new
   end
 
   # GET /users/actlogs/1/edit
