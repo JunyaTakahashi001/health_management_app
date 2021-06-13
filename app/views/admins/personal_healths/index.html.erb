@@ -47,16 +47,16 @@
       <% @admins_personal_healths.each do |admins_personal_health| %>
         <tr>
           <td><%= admins_personal_health.user_id %></td>
-          <td><%= admins_personal_health.temperature_morning %></td>
-          <td><%= admins_personal_health.temperature_night %></td>
-          <td><%= admins_personal_health.cough %></td>
-          <td><%= admins_personal_health.dyspnea %></td>
-          <td><%= admins_personal_health.nasal %></td>
-          <td><%= admins_personal_health.throat %></td>
-          <td><%= admins_personal_health.headache %></td>
-          <td><%= admins_personal_health.diarrhea %></td>
-          <td><%= admins_personal_health.taste %></td>
-          <td><%= admins_personal_health.smell %></td>
+          <td class="<%= text_color_temp(admins_personal_health.temperature_morning) %>"><%= admins_personal_health.temperature_morning %></td>
+          <td class="<%= text_color_temp(admins_personal_health.temperature_night) %>"><%= admins_personal_health.temperature_night %></td>
+          <td class="<%= text_color(admins_personal_health.cough) %>"><%= admins_personal_health.cough %></td>
+          <td class="<%= text_color(admins_personal_health.dyspnea) %>"><%= admins_personal_health.dyspnea %></td>
+          <td class="<%= text_color(admins_personal_health.nasal) %>"><%= admins_personal_health.nasal %></td>
+          <td class="<%= text_color(admins_personal_health.throat) %>"><%= admins_personal_health.throat %></td>
+          <td class="<%= text_color(admins_personal_health.headache) %>"><%= admins_personal_health.headache %></td>
+          <td class="<%= text_color(admins_personal_health.diarrhea) %>"><%= admins_personal_health.diarrhea %></td>
+          <td class="<%= text_color(admins_personal_health.taste) %>"><%= admins_personal_health.taste %></td>
+          <td class="<%= text_color(admins_personal_health.smell) %>"><%= admins_personal_health.smell %></td>
           <td><%= admins_personal_health.ather %></td>
           <td></td>
           <td></td>
