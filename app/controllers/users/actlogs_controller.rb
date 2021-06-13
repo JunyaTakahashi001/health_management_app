@@ -24,15 +24,13 @@ class Users::ActlogsController < Users::ApplicationController
 
   # POST /users/actlogs or /users/actlogs.json
   def create
-    @users_actlog = Users::Actlog.new(users_actlog_params)
+    @actlog = Actlog.new(actlog_params)
 
     respond_to do |format|
-      if @users_actlog.save
-        format.html { redirect_to @users_actlog, notice: "Actlog was successfully created." }
-        format.json { render :show, status: :created, location: @users_actlog }
+      if @actlog.save
+        format.html { redirect_to users_actlogs_path, notice: "Actlog was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @users_actlog.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,7 +64,7 @@ class Users::ActlogsController < Users::ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def users_actlog_params
-      params.fetch(:users_actlog, {})
+    def actlog_params
+      params.require(:actlog).permit(:date, :renge, :start_time, :end_time, :destination, :transportation, :departure, :arrival, :attendees, :attendees_details, :other, :user_id, :health_id)
     end
 end

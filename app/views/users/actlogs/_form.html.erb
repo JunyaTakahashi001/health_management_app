@@ -45,8 +45,8 @@
         <td><%= f.text_field :attendees_details %></td>
         <td><%= f.text_field :other, :size=>"5" %></td>
         <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.hidden_field :date, :value => @params %>
-        <%= f.hidden_field :group_num, :value => current_user.id %>
+        <%= f.hidden_field :health_id, :value => current_user.id %>
+        <%= f.hidden_field :renge, :value => current_user.id %>
         <td> <div class="actions">
           <%= f.submit '登録', class: 'btn btn-primary' %>
         </div></td>
