@@ -15,7 +15,8 @@ class Users::HealthsController < Users::ApplicationController
   # GET /users/healths/new
   def new
     @path = users_healths_path
-    @health = Health.new
+    @params = params[:date]
+    @health = Health.new(date: @params)
   end
 
   # GET /users/healths/1/edit

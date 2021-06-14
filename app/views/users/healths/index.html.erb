@@ -66,7 +66,7 @@
               <td class="<%= text_color(users_health.taste) %>"><%= users_health.taste %></td>
               <td class="<%= text_color(users_health.smell) %>"><%= users_health.smell %></td>
               <td><%= users_health.ather %></td>
-              <td></td>
+              <td><%= link_to '編集', edit_users_health_path(users_health) %></td>
               <td></td>
               <td></td>
             </tr>
@@ -78,7 +78,7 @@
             <% if count == @users_healths.length %>
               <tr>
                 <td><%= f_day.day %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>
-                <%= link_to '登録', new_admins_health_path(date: f_day), class: 'btn btn-outline-dark' %></td><td></td><td></td>
+                <%= link_to '登録', new_users_health_path(date: f_day) %></td><td></td><td></td>
               </tr>
               <% count = 0 %>
             <% end %>
