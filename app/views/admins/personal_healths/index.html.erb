@@ -52,7 +52,7 @@
     <tbody>
       <% @admins_personal_healths.each do |admins_personal_health| %>
         <tr>
-          <td><%= admins_personal_health.user_id %></td>
+          <td><%= @user[0].email %></td>
           <td class="<%= text_color_temp(admins_personal_health.temperature_morning) %>"><%= admins_personal_health.temperature_morning %></td>
           <td class="<%= text_color_temp(admins_personal_health.temperature_night) %>"><%= admins_personal_health.temperature_night %></td>
           <td class="<%= text_color(admins_personal_health.cough) %>"><%= admins_personal_health.cough %></td>
