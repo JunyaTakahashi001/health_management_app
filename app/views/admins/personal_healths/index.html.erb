@@ -17,6 +17,7 @@
     <%# ユーザー選択ドロップダウン %>
     <%= form_with url: admins_personal_healths_path, local: true, method: :GET do |f| %>
       <%= f.select :user, @users.map{ |user| [user.email, user.id] } %>
+      <%= f.hidden_field :month, :value => @month %>
       <%= f.submit '表示', class: 'btn btn-primary', data: { disable_with: "取得中..." } %>
     <% end %>
   </div>
