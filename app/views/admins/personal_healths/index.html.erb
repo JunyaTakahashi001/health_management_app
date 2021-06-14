@@ -15,9 +15,6 @@
   <p>氏名：<%=  %></p>
   <%= link_to "<前月", admins_personal_healths_path(month:@month.prev_month) %>
   <%= link_to "翌月>", admins_personal_healths_path(month:@month.next_month) %>
-  <br>
-  <%= link_to "<前日", admins_personal_healths_path(month:@month.yesterday) %>
-  <%= link_to "翌日>", admins_personal_healths_path(month:@month.tomorrow) %>
 </div>
 
 <div class='index'>
@@ -75,3 +72,4 @@
   <%= f.select :user, @users.map{ |user| [user.email, user.id] } %>
   <%= f.submit '表示', class: 'btn btn-primary' %>
 <% end %>
+<%= link_to 'リセット', :back, class: 'btn btn-outline-dark' %>
