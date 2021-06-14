@@ -11,11 +11,19 @@
 <% if flash[:notice] %>
   <div class="alert alert-primary"><%= flash[:notice] %></div>
 <% end %>
-<div>
-  <p>氏名：<%=  %></p>
-  <%= link_to "<前月", admins_personal_healths_path(month:@month.prev_month) %>
-  <%= link_to "翌月>", admins_personal_healths_path(month:@month.next_month) %>
+<div class="d-flex align-items-center">
+  <h4>氏名：<%= @user[0].email %></h4>
+  <div class="ml-auto">
+    <%# ユーザー選択ドロップダウン %>
+    <%= form_with url: admins_personal_healths_path, local: true, method: :GET do |f| %>
+      <%= f.select :user, @users.map{ |user| [user.email, user.id] } %>
+      <%= f.submit '表示', class: 'btn btn-primary', data: { disable_with: "取得中..." } %>
+    <% end %>
+  </div>
 </div>
+
+<%= link_to "<前月", admins_personal_healths_path(month:@month.prev_month) %>
+<%= link_to "翌月>", admins_personal_healths_path(month:@month.next_month) %>
 
 <div class='index'>
  <div class='col-mid-12'>
@@ -66,10 +74,3 @@
     </tbody>
   </div>
 </div>
-
-<%# ユーザー選択ドロップダウン %>
-<%= form_with url: admins_personal_healths_path, method: :GET, local: true do |f| %>
-  <%= f.select :user, @users.map{ |user| [user.email, user.id] } %>
-  <%= f.submit '表示', class: 'btn btn-primary' %>
-<% end %>
-<%= link_to 'リセット', :back, class: 'btn btn-outline-dark' %>

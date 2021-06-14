@@ -5,13 +5,17 @@ class Admins::PersonalHealthsController < Admins::ApplicationController
   def index
     # @users = params[:user] ? @users : User.all
     if params[:user].present?
-      @users = User.where(id: params[:user])
+      # ユーザー選択あり
+      @users = User.all
+      @user = User.where(id: params[:user])
       # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
       @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
       # 取得した時刻が含まれる日の範囲のデータを取得
-      @admins_personal_healths = Health.where(date: @month.all_month).where(user_id: @users[0].id).order('date ASC')
+      @admins_personal_healths = Health.where(date: @month.all_month).where(user_id: @user[0].id).order('date ASC')
     else
+      # ユーザー選択なし
       @users = User.all
+      @user = @users
       # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
       @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
       # 取得した時刻が含まれる日の範囲のデータを取得
