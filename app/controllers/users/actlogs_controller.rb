@@ -15,7 +15,7 @@ class Users::ActlogsController < Users::ApplicationController
   # GET /users/actlogs/new
   def new
     @users_health_id = params[:users_health_id]
-    @date = params[:date]
+    @date = params[:date].to_date
     @path = users_actlogs_path
     # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
