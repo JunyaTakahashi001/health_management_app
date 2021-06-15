@@ -3,6 +3,7 @@
   <table class="table table-striped">
     <thead class="thead-light">
       <tr>
+        <th>No</th>
         <th>出発時刻</th>
         <th>到着時刻</th>
         <th>行先</th>
@@ -25,6 +26,7 @@
           <div class="field">
             <tbody>
               <tr>
+                <td><%= field.text_field :renge, :value => count, disabled: true, :size=>"2" %></td>
                 <td><%= field.time_field :start_time, class: 'form-control' %></td>
                 <td><%= field.time_field :end_time, class: 'form-control' %></td>
                 <td><%= field.text_field :destination, :size=>"8" %></td>
@@ -39,7 +41,6 @@
                 <td><%= field.text_field :other, :size=>"8" %></td>
                 <%= field.hidden_field :user_id, :value => current_user.id %>
                 <%= field.hidden_field :health_id, :value => @users_health_id %>
-                <%= field.hidden_field :renge, :value => count %>
                 <%= field.hidden_field :date, :value => @date %>
               </tr>
           </tbody>

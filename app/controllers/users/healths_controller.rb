@@ -6,6 +6,9 @@ class Users::HealthsController < Users::ApplicationController
     # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     @users_healths = Health.where(date: @month.all_month).where(user_id: current_user.id).order('date ASC')
+  
+    # 行動履歴取得
+    @users_actlogs = Actlog.where(date: @month.all_month).where(user_id: current_user.id).order('date ASC')
   end
 
   # GET /users/healths/1 or /users/healths/1.json
