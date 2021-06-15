@@ -15,15 +15,10 @@
         <th>特記事項</th>
       </tr>
     </thead>
-
-    <%# 変数初期化 %>
-    <% count = 1 %>
-
-    
-    <%= form_with(model: @actlogs, local: true, url: @path) do |f| %>
+    <%= form_with(model: @actlog, local: true, url: @path) do |f| %>
     <tbody>
       <tr>
-        <td><%= f.text_field :renge, :value => count, :size=>"2" %></td>
+        <td><%= f.text_field :renge, :size=>"2" %></td>
         <td><%= f.time_field :start_time, class: 'form-control' %></td>
         <td><%= f.time_field :end_time, class: 'form-control' %></td>
         <td><%= f.text_field :destination, :size=>"8" %></td>
@@ -36,9 +31,9 @@
         </td>
         <td><%= f.text_field :attendees_details, :size=>"8" %></td>
         <td><%= f.text_field :other, :size=>"8" %></td>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.hidden_field :health_id, :value => @users_health_id %>
-        <%= f.hidden_field :date, :value => @date %>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :health_id %>
+        <%= f.hidden_field :date %>
         <%= f.submit %>
       </tr>
     </tbody>

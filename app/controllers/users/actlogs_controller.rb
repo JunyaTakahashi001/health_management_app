@@ -25,8 +25,8 @@ class Users::ActlogsController < Users::ApplicationController
 
   # GET /users/actlogs/1/edit
   def edit
-    @actlogs = Actlog.find(params[:id])
-    @path = "/users/actlogs/#{@actlogs[:id]}"
+    @actlog = Actlog.find(params[:id])
+    @path = "/users/actlogs/#{@actlog[:id]}"
   end
 
   # POST /users/actlogs or /users/actlogs.json
@@ -43,15 +43,10 @@ class Users::ActlogsController < Users::ApplicationController
 
   # PATCH/PUT /users/actlogs/1 or /users/actlogs/1.json
   def update
-    respond_to do |format|
-      if @users_actlog.update(users_actlog_params)
-        format.html { redirect_to @users_actlog, notice: "Actlog was successfully updated." }
-        format.json { render :show, status: :ok, location: @users_actlog }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @users_actlog.errors, status: :unprocessable_entity }
-      end
-    end
+    actlog = Actlog.find(params[:id])
+    actlog.update(actlog_params)
+
+    redirect_to users_healths_path
   end
 
   # DELETE /users/actlogs/1 or /users/actlogs/1.json
@@ -71,6 +66,6 @@ class Users::ActlogsController < Users::ApplicationController
 
     # Only allow a list of trusted parameters through.
     def actlog_params
-      params.require(:actlogs)
+      params.require(:actlog).permit(:renge, :date, :start_time, :end_time, :destination, :transportation, :departure, :arrival, :attendees, :attendees_details, :other, :user_id, :health_id)
     end
 end
