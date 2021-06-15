@@ -39,8 +39,8 @@
       <% @actlogs.each do |actlog| %>
         <tr>
           <td><%= actlog.renge %></td>
-          <td><%= actlog.start_time %></td>
-          <td><%= actlog.end_time %></td>
+          <td><%= actlog.start_time.strftime('%H:%M') %></td>
+          <td><%= actlog.end_time.strftime('%H:%M') %></td>
           <td><%= actlog.destination %></td>
           <td><%= actlog.transportation %></td>
           <td><%= actlog.departure %></td>

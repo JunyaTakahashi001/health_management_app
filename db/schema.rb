@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_12_153145) do
+ActiveRecord::Schema.define(version: 2021_06_15_105538) do
 
   create_table "actlogs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "date", null: false
     t.integer "renge", null: false
-    t.time "start_time"
-    t.time "end_time"
+    t.time "start_time", default: "2000-01-01 00:00:00"
+    t.time "end_time", default: "2000-01-01 00:00:00"
     t.string "destination"
     t.string "transportation"
     t.string "departure"

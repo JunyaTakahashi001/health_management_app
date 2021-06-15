@@ -44,7 +44,7 @@ class Users::ActlogsController < Users::ApplicationController
   # PATCH/PUT /users/actlogs/1 or /users/actlogs/1.json
   def update
     actlog = Actlog.find(params[:id])
-    actlog.update(actlog_params)
+    actlog.update(actlog_edit_params)
 
     redirect_to users_healths_path
   end
@@ -66,6 +66,10 @@ class Users::ActlogsController < Users::ApplicationController
 
     # Only allow a list of trusted parameters through.
     def actlog_params
+      params.require(:actlogs)
+    end
+
+    def actlog_edit_params
       params.require(:actlog).permit(:renge, :date, :start_time, :end_time, :destination, :transportation, :departure, :arrival, :attendees, :attendees_details, :other, :user_id, :health_id)
     end
 end
