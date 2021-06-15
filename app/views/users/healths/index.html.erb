@@ -78,18 +78,24 @@
                 <td><%= users_health.ather %></td>
                 <td><%= link_to '編集', edit_users_health_path(users_health) %></td>
                 <%# 行動履歴 %>
-                <% @users_actlogs.each do |users_actlog| %>
-                  <% if users_actlog.date == f_day %>
-                    <td>あり</td>
-                    <td><%= link_to '編集' %></td>
-                    <% count_log = 0 %>
-                    <% break %>
-                  <% else %>
-                    <% count_log += 1 %>
-                    <% if count_log == @users_actlogs.length %>
-                      <td></td>
-                      <td><%= link_to '登録', new_users_actlog_path(users_health_id:users_health.id, date: f_day) %></td>
+                <% if @users_actlogs.length == 0  %>
+                  <%# healths登録がない月 %>
+                  <td>なし</td>
+                  <td><%= link_to '登録', new_users_actlog_path(users_health_id:users_health.id, date: f_day) %></td>
+                <% else %>
+                  <% @users_actlogs.each do |users_actlog| %>
+                    <% if users_actlog.date == f_day %>
+                      <td>あり</td>
+                      <td><%= link_to '詳細', users_actlogs_path(date: f_day) %></td>
                       <% count_log = 0 %>
+                      <% break %>
+                    <% else %>
+                      <% count_log += 1 %>
+                      <% if count_log == @users_actlogs.length %>
+                        <td>なし</td>
+                        <td><%= link_to '登録', new_users_actlog_path(users_health_id:users_health.id, date: f_day) %></td>
+                        <% count_log = 0 %>
+                      <% end %>
                     <% end %>
                   <% end %>
                 <% end %>

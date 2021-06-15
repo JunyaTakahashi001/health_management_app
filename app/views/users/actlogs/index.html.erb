@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <div class="d-flex align-items-center">
-  <h1><%= @month.year %> 年 <%= @month.month %>月 <%= @month.day %>日 行動履歴登録一覧</h1>
+  <h1><%= @date.year %> 年 <%= @date.month %>月 <%= @date.day %>日 行動履歴登録一覧</h1>
   <div class="ml-auto">
     <%= link_to '登録', new_users_actlog_path, class: 'btn btn-outline-dark' %>
-    <%= link_to '健康状態登録一覧', users_healths_path, class: 'btn btn-outline-dark' %>
+    <%= link_to '戻る', :back, class: 'btn btn-outline-dark' %>
     <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark' %>
   </div>
 </div>
@@ -14,11 +14,6 @@
 <% end %>
 <div>
   <p>氏名：<%= current_user.email %></p>
-  <%= link_to "<前月", users_actlogs_path(month:@month.prev_month) %>
-  <%= link_to "次月>", users_actlogs_path(month:@month.next_month) %>
-  <br>
-  <%= link_to "<前日", users_actlogs_path(month:@month.yesterday) %>
-  <%= link_to "翌日>", users_actlogs_path(month:@month.tomorrow) %>
 </div>
 
 <div class='index'>
@@ -37,14 +32,12 @@
         <th>詳細</th>
         <th>特記事項</th>
         <th>更新</th>
-        <th>削除</th>
       </tr>
     </thead>
 
     <tbody>
       <% @users_actlogs.each do |users_actlog| %>
         <tr>
-          <td><%= users_actlog.date %></td>
           <td><%= users_actlog.renge %></td>
           <td><%= users_actlog.end_time %></td>
           <td><%= users_actlog.destination %></td>
