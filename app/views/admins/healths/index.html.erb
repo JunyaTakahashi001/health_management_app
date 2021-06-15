@@ -45,6 +45,7 @@
           <% @users.each do |user| %>
             <% if user.id == admins_health.user_id %>
               <td><%= user.email %></td>
+              <% @at_user = user.id %>
             <% end %>
           <% end %>
           <td class="<%= text_color_temp(admins_health.temperature_morning) %>"><%= admins_health.temperature_morning %></td>
@@ -58,8 +59,19 @@
           <td class="<%= text_color(admins_health.taste) %>"><%= admins_health.taste %></td>
           <td class="<%= text_color(admins_health.smell) %>"><%= admins_health.smell %></td>
           <td><%= admins_health.ather %></td>
-          <td></td>
-          <td></td>
+          <%# 行動記録 %>
+          <% if @users_actlogs.length == 0  %>
+            <td>なし</td>
+            <td>なし</td>
+          <% else %>
+            <% @users_actlogs.each do |users_actlog| %>
+              <% if users_actlog.date == admins_health.date && @at_user == users_actlog.user_id %>
+                <td>あり</td>
+                <td><%= link_to '詳細'%></td>
+              <% break %>
+              <% end %>
+            <% end %>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

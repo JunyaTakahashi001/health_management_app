@@ -44,7 +44,6 @@
         <th>味覚異常</th>
         <th>嗅覚異常</th>
         <th>その他</th>
-        <th>詳細</th>
         <th>行動記録</th>
         <th>詳細</th>
       </tr>
@@ -63,7 +62,7 @@
         <% if @admins_personal_healths.length == 0  %>
           <%# healths登録がない月 %>
           <tr>
-            <td><%= @user[0].email %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td><%= @user[0].email %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
           </tr>
         <% else %>
           <%# healths登録が1以上の月 %>
@@ -83,7 +82,7 @@
                 <td class="<%= text_color(admins_personal_health.taste) %>"><%= admins_personal_health.taste %></td>
                 <td class="<%= text_color(admins_personal_health.smell) %>"><%= admins_personal_health.smell %></td>
                 <td><%= admins_personal_health.ather %></td>
-                <td></td>
+                <%# 行動履歴 %>
                 <td></td>
                 <td></td>
                 <%# link_to 'Show', admins_personal_health %>
@@ -95,7 +94,7 @@
               <% count += 1 %>
               <% if count == @admins_personal_healths.length %>
                 <tr>
-                  <td><%= f_day.day %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                  <td><%= f_day.day %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                 </tr>
                 <% count = 0 %>
               <% end %>

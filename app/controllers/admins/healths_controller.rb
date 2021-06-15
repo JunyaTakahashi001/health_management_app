@@ -9,7 +9,7 @@ class Admins::HealthsController < Admins::ApplicationController
     # 取得した時刻が含まれる日の範囲のデータを取得
     @admins_healths = Health.where(date: @month.all_day).order('date ASC')
     # 行動履歴取得
-    @users_actlogs = Actlog.where(date: @month.all_month).order('date ASC')
+    @users_actlogs = Actlog.where(date: @month.all_day).order('date ASC')
   end
 
   # GET /admins/healths/1 or /admins/healths/1.json
