@@ -11,6 +11,7 @@
 <% if flash[:notice] %>
   <div class="alert alert-primary"><%= flash[:notice] %></div>
 <% end %>
+
 <div class="d-flex align-items-center">
   <h4>氏名：<%= @user[0].email %></h4>
   <div class="ml-auto">
@@ -31,7 +32,7 @@
   <table class="table table-striped">
     <thead class="thead-light">
       <tr>
-        <th>氏名</th>
+        <th>日付</th>
         <th>体温（朝）</th>
         <th>体温（夕）</th>
         <th>咳嗽</th>
@@ -49,28 +50,59 @@
       </tr>
     </thead>
 
+    <%# 該当月の日数を取得 %>
+    <% days = end_of_month %>
+    <%# 月初、月末取得 %>
+    <% f_day = first_day %>
+    <% l_day = last_day %>
+    <%# 変数初期化 %>
+    <% count = 0 %>
+
     <tbody>
-      <% @admins_personal_healths.each do |admins_personal_health| %>
-        <tr>
-          <td><%= @user[0].email %></td>
-          <td class="<%= text_color_temp(admins_personal_health.temperature_morning) %>"><%= admins_personal_health.temperature_morning %></td>
-          <td class="<%= text_color_temp(admins_personal_health.temperature_night) %>"><%= admins_personal_health.temperature_night %></td>
-          <td class="<%= text_color(admins_personal_health.cough) %>"><%= admins_personal_health.cough %></td>
-          <td class="<%= text_color(admins_personal_health.dyspnea) %>"><%= admins_personal_health.dyspnea %></td>
-          <td class="<%= text_color(admins_personal_health.nasal) %>"><%= admins_personal_health.nasal %></td>
-          <td class="<%= text_color(admins_personal_health.throat) %>"><%= admins_personal_health.throat %></td>
-          <td class="<%= text_color(admins_personal_health.headache) %>"><%= admins_personal_health.headache %></td>
-          <td class="<%= text_color(admins_personal_health.diarrhea) %>"><%= admins_personal_health.diarrhea %></td>
-          <td class="<%= text_color(admins_personal_health.taste) %>"><%= admins_personal_health.taste %></td>
-          <td class="<%= text_color(admins_personal_health.smell) %>"><%= admins_personal_health.smell %></td>
-          <td><%= admins_personal_health.ather %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <%# link_to 'Show', admins_personal_health %>
-          <%# link_to 'Edit', edit_admins_personal_health_path(admins_personal_health) %>
-          <%# link_to 'Destroy', admins_personal_health, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </tr>
+      <% while f_day <= l_day do %>
+        <% if @admins_personal_healths.length == 0  %>
+          <%# healths登録がない月 %>
+          <tr>
+            <td><%= @user[0].email %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        <% else %>
+          <%# healths登録が1以上の月 %>
+          <% @admins_personal_healths.each do |admins_personal_health| %>
+            <% if admins_personal_health.date == f_day %>
+              <%# 日付が一致する場合 %>
+              <tr>
+                <td><%= f_day.day %>日</td>
+                <td class="<%= text_color_temp(admins_personal_health.temperature_morning) %>"><%= admins_personal_health.temperature_morning %></td>
+                <td class="<%= text_color_temp(admins_personal_health.temperature_night) %>"><%= admins_personal_health.temperature_night %></td>
+                <td class="<%= text_color(admins_personal_health.cough) %>"><%= admins_personal_health.cough %></td>
+                <td class="<%= text_color(admins_personal_health.dyspnea) %>"><%= admins_personal_health.dyspnea %></td>
+                <td class="<%= text_color(admins_personal_health.nasal) %>"><%= admins_personal_health.nasal %></td>
+                <td class="<%= text_color(admins_personal_health.throat) %>"><%= admins_personal_health.throat %></td>
+                <td class="<%= text_color(admins_personal_health.headache) %>"><%= admins_personal_health.headache %></td>
+                <td class="<%= text_color(admins_personal_health.diarrhea) %>"><%= admins_personal_health.diarrhea %></td>
+                <td class="<%= text_color(admins_personal_health.taste) %>"><%= admins_personal_health.taste %></td>
+                <td class="<%= text_color(admins_personal_health.smell) %>"><%= admins_personal_health.smell %></td>
+                <td><%= admins_personal_health.ather %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <%# link_to 'Show', admins_personal_health %>
+              </tr>
+              <% count = 0 %>
+              <% break %>
+            <% else %>
+              <%# 一致する日付がない場合 %>
+              <% count += 1 %>
+              <% if count == @admins_personal_healths.length %>
+                <tr>
+                  <td><%= f_day.day %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <% count = 0 %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% f_day += 1 %>
       <% end %>
     </tbody>
   </div>
