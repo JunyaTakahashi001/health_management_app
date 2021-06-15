@@ -5,7 +5,7 @@ class Users::ActlogsController < Users::ApplicationController
   def index
     # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
-    @users_actlogs = Actlog.where(health_id: 1).where(user_id: current_user.id).order('date ASC')
+    @users_actlogs = Actlog.all
   end
 
   # GET /users/actlogs/1 or /users/actlogs/1.json
@@ -27,7 +27,6 @@ class Users::ActlogsController < Users::ApplicationController
   # POST /users/actlogs or /users/actlogs.json
   def create
     @actlogs = ActlogCollection.new(actlog_params)
-
     respond_to do |format|
       if @actlogs.save
         format.html { redirect_to users_actlogs_path, notice: "Actlog was successfully created." }
@@ -67,6 +66,6 @@ class Users::ActlogsController < Users::ApplicationController
 
     # Only allow a list of trusted parameters through.
     def actlog_params
-      params.require(:actlog).permit(:date, :renge, :start_time, :end_time, :destination, :transportation, :departure, :arrival, :attendees, :attendees_details, :other, :user_id, :health_id)
+      params.require(:actlogs)
     end
 end

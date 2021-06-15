@@ -12,19 +12,19 @@ class ActlogCollection
       if attributes.present?
         self.collection = attributes.map do |value|
           Actlog.new(
-            date: value[2000-00-00],
-            renge: value[0],
-            start_time: value[00-00],
-            end_time: value[00-00],
+            date: value['date'],
+            renge: value['renge'],
+            start_time: value['start_time'],
+            end_time: value['end_time'],
             destination: value['destination'],
             transportation: value['transportation'],
             departure: value['departure'],
             arrival: value['arrival'],
-            attendees: value[0],
+            attendees: value['attendees'],
             attendees_details: value['attendees_details'],
             other: value['other'],
-            user_id: value[0],
-            health_id: value[0]
+            user_id: value['user_id'],
+            health_id: value['health_id']
           )
         end
       else
