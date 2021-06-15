@@ -6,7 +6,7 @@ class Users::ActlogsController < Users::ApplicationController
     @date = params[:date].to_date
     # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
-    @users_actlogs = Actlog.where(date: @date.all_day).where(user_id: current_user.id).order('date ASC')
+    @actlogs = Actlog.where(date: @date.all_day).where(user_id: current_user.id).order('date ASC')
   end
 
   # GET /users/actlogs/1 or /users/actlogs/1.json
@@ -25,6 +25,8 @@ class Users::ActlogsController < Users::ApplicationController
 
   # GET /users/actlogs/1/edit
   def edit
+    @actlogs = Actlog.find(params[:id])
+    @path = "/users/actlogs/#{@actlogs[:id]}"
   end
 
   # POST /users/actlogs or /users/actlogs.json
@@ -64,7 +66,7 @@ class Users::ActlogsController < Users::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_users_actlog
-      @users_actlog = Users::Actlog.find(params[:id])
+      @users_actlog = Actlog.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

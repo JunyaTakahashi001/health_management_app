@@ -36,19 +36,19 @@
     </thead>
 
     <tbody>
-      <% @users_actlogs.each do |users_actlog| %>
+      <% @actlogs.each do |actlog| %>
         <tr>
-          <td><%= users_actlog.renge %></td>
-          <td><%= users_actlog.end_time %></td>
-          <td><%= users_actlog.destination %></td>
-          <td><%= users_actlog.transportation %></td>
-          <td><%= users_actlog.departure %></td>
-          <td><%= users_actlog.arrival %></td>
-          <td><%= users_actlog.attendees %></td>
-          <td><%= users_actlog.attendees_details %></td>
-          <td><%= users_actlog.other %></td>
-          <td></td>
-          <td></td>
+          <td><%= actlog.renge %></td>
+          <td><%= actlog.start_time %></td>
+          <td><%= actlog.end_time %></td>
+          <td><%= actlog.destination %></td>
+          <td><%= actlog.transportation %></td>
+          <td><%= actlog.departure %></td>
+          <td><%= actlog.arrival %></td>
+          <td><%= actlog.attendees %></td>
+          <td><%= actlog.attendees_details %></td>
+          <td><%= actlog.other %></td>
+          <td><%= link_to '編集', edit_users_actlog_path(actlog) %></td>
           <%# link_to 'Show', users_actlog %>
           <%# link_to 'Edit', edit_users_actlog_path(users_actlog) %>
           <%# link_to 'Destroy', users_actlog, method: :delete, data: { confirm: 'Are you sure?' } %>    

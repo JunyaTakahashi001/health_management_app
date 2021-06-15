@@ -1,6 +1,10 @@
-<h1>Editing Users Actlog</h1>
+<div class="d-flex align-items-center">
+  <h1>行動履歴編集</h1>
+  <div class="ml-auto">
+    <%= link_to '一覧へ戻る', :back, class: 'btn btn-outline-dark' %>
+  </div>
+</div>
 
-<%= render 'form', users_actlog: @users_actlog %>
+<p>氏名：<%= current_user.email %></p>
 
-<%= link_to 'Show', @users_actlog %> |
-<%= link_to 'Back', users_actlogs_path %>
+<%= render partial: 'form_edit', locals: {sers_actlog: @users_actlog} %>
