@@ -1,55 +1,50 @@
-<%= form_with(model: @actlog, local: true, url: @path) do |f| %>
-  <% if @actlog.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(users_actlog.errors.count, "error") %> prohibited this users_actlog from being saved:</h2>
-
-      <ul>
-      <% users_actlog.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class='index'>
+<div class='index'>
  <div class='col-mid-12'>
   <table class="table table-striped">
     <thead class="thead-light">
-    <tr>
-      <th>日付</th>
-      <th>出発時刻</th>
-      <th>到着時刻</th>
-      <th>行先</th>
-      <th>移動方法</th>
-      <th>出発地</th>
-      <th>到着（帰着）地</th>
-      <th>同行者・同席者</th>
-      <th>ありの場合は間柄等を記入</th>
-      <th>特記事項</th>
-      <th></th>
+      <tr>
+        <th>出発時刻</th>
+        <th>到着時刻</th>
+        <th>行先</th>
+        <th>移動方法</th>
+        <th>出発地</th>
+        <th>到着（帰着）地</th>
+        <th>同行者・同席者</th>
+        <th>ありの場合は間柄等を記入</th>
+        <th>特記事項</th>
       </tr>
     </thead>
     <tbody>
-      <div class="form-group">
-        <td><%= f.date_field :date, class: 'form-control'%></td>
-        <td><%= f.time_field :start_time, class: 'form-control' %></td>
-        <td><%= f.time_field :end_time, class: 'form-control' %></td>
-        <td><%= f.text_field :destination, :size=>"10" %></td>
-        <td><%= f.text_field :transportation, :size=>"10" %></td>
-        <td><%= f.text_field :departure, :size=>"10" %></td>
-        <td><%= f.text_field :arrival, :size=>"10" %></td>
-        <td>
-          <%= f.radio_button :attendees, "あり", {} %> あり
-          <%= f.radio_button :attendees, "なし", {} %> なし
-        </td>
-        <td><%= f.text_field :attendees_details %></td>
-        <td><%= f.text_field :other, :size=>"5" %></td>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.hidden_field :health_id, :value => current_user.id %>
-        <%= f.hidden_field :renge, :value => current_user.id %>
-        <td> <div class="actions">
-          <%= f.submit '登録', class: 'btn btn-primary' %>
-        </div></td>
-      </div>
+      <%= form_with(model: @actlogs, local: true, url: @path) do |f| %>
+        <% @actlogs.collection.each do |actlog| %>
+          <%= fields_for 'actlogs[]', actlog do |field| %>
+              <div class="field">
+                <tr>
+                  <td><%= field.time_field :start_time, class: 'form-control' %></td>
+                  <td><%= field.time_field :end_time, class: 'form-control' %></td>
+                  <td><%= field.text_field :destination, :size=>"8" %></td>
+                  <td><%= field.text_field :transportation, :size=>"8" %></td>
+                  <td><%= field.text_field :departure, :size=>"8" %></td>
+                  <td><%= field.text_field :arrival, :size=>"8" %></td>
+                  <td>
+                    <%= field.radio_button :attendees, "あり", {} %> あり
+                    <%= field.radio_button :attendees, "なし", {} %> なし
+                  </td>
+                  <td><%= field.text_field :attendees_details, :size=>"8" %></td>
+                  <td><%= field.text_field :other, :size=>"8" %></td>
+                  <%= field.hidden_field :user_id, :value => current_user.id %>
+                  <%= field.hidden_field :health_id, :value => current_user.id %>
+                  <%= field.hidden_field :renge, :value => current_user.id %>
+                  <%= field.hidden_field :date, :value => @month %>
+                </tr>
+              </div>
+            <% end %>
+          <% end %>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>
     </tbody>
-<% end %>
+  </table>
+ </div>
+</div>

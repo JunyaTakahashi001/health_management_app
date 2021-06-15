@@ -1,0 +1,42 @@
+<div class='index'>
+ <div class='col-mid-12'>
+  <table class="table table-striped">
+    <thead class="thead-light">
+    <tr>
+      <th>日付</th>
+      <th>出発時刻</th>
+      <th>到着時刻</th>
+      <th>行先</th>
+      <th>移動方法</th>
+      <th>出発地</th>
+      <th>到着（帰着）地</th>
+      <th>同行者・同席者</th>
+      <th>ありの場合は間柄等を記入</th>
+      <th>特記事項</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <div class="form-group">
+        <td><%= f.date_field :date, class: 'form-control'%></td>
+        <td><%= f.time_field :start_time, class: 'form-control' %></td>
+        <td><%= f.time_field :end_time, class: 'form-control' %></td>
+        <td><%= f.text_field :destination, :size=>"10" %></td>
+        <td><%= f.text_field :transportation, :size=>"10" %></td>
+        <td><%= f.text_field :departure, :size=>"10" %></td>
+        <td><%= f.text_field :arrival, :size=>"10" %></td>
+        <td>
+          <%= f.radio_button :attendees, "あり", {} %> あり
+          <%= f.radio_button :attendees, "なし", {} %> なし
+        </td>
+        <td><%= f.text_field :attendees_details %></td>
+        <td><%= f.text_field :other, :size=>"5" %></td>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.hidden_field :health_id, :value => current_user.id %>
+        <%= f.hidden_field :renge, :value => current_user.id %>
+        <td> <div class="actions">
+          <%= f.submit '登録', class: 'btn btn-primary' %>
+        </div></td>
+      </div>
+    </tbody>
+<% end %>

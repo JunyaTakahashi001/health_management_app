@@ -14,8 +14,10 @@ class Users::ActlogsController < Users::ApplicationController
 
   # GET /users/actlogs/new
   def new
+    # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
+    @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     @path = users_actlogs_path
-    @actlog = Actlog.new
+    @actlogs = ActlogCollection.new
   end
 
   # GET /users/actlogs/1/edit
@@ -24,10 +26,10 @@ class Users::ActlogsController < Users::ApplicationController
 
   # POST /users/actlogs or /users/actlogs.json
   def create
-    @actlog = Actlog.new(actlog_params)
+    @actlogs = ActlogCollection.new(actlog_params)
 
     respond_to do |format|
-      if @actlog.save
+      if @actlogs.save
         format.html { redirect_to users_actlogs_path, notice: "Actlog was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
