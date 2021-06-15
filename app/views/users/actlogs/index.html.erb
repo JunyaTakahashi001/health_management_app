@@ -39,8 +39,16 @@
       <% @actlogs.each do |actlog| %>
         <tr>
           <td><%= actlog.renge %></td>
-          <td><%= actlog.start_time.strftime('%H:%M') %></td>
-          <td><%= actlog.end_time.strftime('%H:%M') %></td>
+          <% if actlog.start_time.strftime('%H:%M') == '00:00' %>
+            <td></td>
+          <% else %>
+            <td><%= actlog.start_time.strftime('%H:%M') %></td>
+          <% end %>
+          <% if actlog.end_time.strftime('%H:%M') == '00:00' %>
+            <td></td>
+          <% else %>
+            <td><%= actlog.end_time.strftime('%H:%M') %></td>
+          <% end %>
           <td><%= actlog.destination %></td>
           <td><%= actlog.transportation %></td>
           <td><%= actlog.departure %></td>
