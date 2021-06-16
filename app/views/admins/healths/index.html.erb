@@ -64,11 +64,19 @@
             <td>なし</td>
             <td>なし</td>
           <% else %>
+            <% i = 0 %>
             <% @users_actlogs.each do |users_actlog| %>
               <% if users_actlog.date == admins_health.date && @at_user == users_actlog.user_id %>
                 <td>あり</td>
                 <td><%= link_to '詳細'%></td>
-              <% break %>
+                <% break %>
+              <% else %>
+                <% i += 1 %>
+                <% if i == @users_actlogs.length %>
+                  <td>なし</td>
+                  <td>なし</td>
+                  <% i = 0 %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
