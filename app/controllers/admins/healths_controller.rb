@@ -15,7 +15,7 @@ class Admins::HealthsController < Admins::ApplicationController
   # GET /admins/healths/1 or /admins/healths/1.json
   def show
     # ユーザ名取得
-
+    @user = params[:user]
     # 行動履歴取得
     @actlogid = params[:id]
     @users_actlog = Actlog.where(id: @actlogid)

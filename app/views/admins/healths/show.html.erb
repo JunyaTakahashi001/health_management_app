@@ -1,12 +1,12 @@
 <div class="d-flex align-items-center">
   <h1><%= @users_actlogs[0].date.year %>年 <%= @users_actlogs[0].date.month %>月 <%= @users_actlogs[0].date.day %>日 管理者用 行動履歴</h1>
   <div class="ml-auto">
-    <%= link_to '個人別健康状態一覧', :back, class: 'btn btn-outline-dark' %>
+    <%= link_to '戻る', :back, class: 'btn btn-outline-dark' %>
     <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-dark' %>
   </div>
 </div>
 
-<p>氏名：</p>
+<p>氏名：<%= @user %></p>
 
 <div class='index'>
  <div class='col-mid-12'>

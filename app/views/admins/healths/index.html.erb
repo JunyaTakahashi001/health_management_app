@@ -46,6 +46,7 @@
             <% if user.id == admins_health.user_id %>
               <td><%= user.email %></td>
               <% @at_user = user.id %>
+              <% @at_user_emael = user.email %>
             <% end %>
           <% end %>
           <td class="<%= text_color_temp(admins_health.temperature_morning) %>"><%= admins_health.temperature_morning %></td>
@@ -68,7 +69,7 @@
             <% @users_actlogs.each do |users_actlog| %>
               <% if users_actlog.date == admins_health.date && @at_user == users_actlog.user_id %>
                 <td>あり</td>
-                <td><%= link_to '詳細', admins_health_path(users_actlog) %></td>
+                <td><%= link_to '詳細', admins_health_path(users_actlog, user:@at_user_emael) %></td>
                 <% break %>
               <% else %>
                 <% i += 1 %>
