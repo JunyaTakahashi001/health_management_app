@@ -28,81 +28,91 @@
 <%= link_to "翌月>", admins_personal_healths_path(month:@month.next_month) %>
 
 <div class='index'>
- <div class='col-mid-12'>
-  <table class="table table-striped">
-    <thead class="thead-light">
-      <tr>
-        <th>日付</th>
-        <th>体温（朝）</th>
-        <th>体温（夕）</th>
-        <th>咳嗽</th>
-        <th>呼吸困難</th>
-        <th>鼻汁・鼻閉</th>
-        <th>咽頭痛</th>
-        <th>頭痛</th>
-        <th>下痢</th>
-        <th>味覚異常</th>
-        <th>嗅覚異常</th>
-        <th>その他</th>
-        <th>行動記録</th>
-        <th>詳細</th>
-      </tr>
-    </thead>
+  <div class='col-mid-12'>
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th>日付</th>
+          <th>体温（朝）</th>
+          <th>体温（夕）</th>
+          <th>咳嗽</th>
+          <th>呼吸困難</th>
+          <th>鼻汁・鼻閉</th>
+          <th>咽頭痛</th>
+          <th>頭痛</th>
+          <th>下痢</th>
+          <th>味覚異常</th>
+          <th>嗅覚異常</th>
+          <th>その他</th>
+          <th>行動記録</th>
+          <th>詳細</th>
+        </tr>
+      </thead>
 
-    <%# 該当月の日数を取得 %>
-    <% days = end_of_month %>
-    <%# 月初、月末取得 %>
-    <% f_day = first_day %>
-    <% l_day = last_day %>
-    <%# 変数初期化 %>
-    <% count = 0 %>
+      <%# 該当月の日数を取得 %>
+      <% days = end_of_month %>
+      <%# 月初、月末取得 %>
+      <% f_day = first_day %>
+      <% l_day = last_day %>
+      <%# 変数初期化 %>
+      <% count = 0 %>
 
-    <tbody>
-      <% while f_day <= l_day do %>
-        <% if @admins_personal_healths.length == 0  %>
-          <%# healths登録がない月 %>
-          <tr>
-            <td><%= @user[0].email %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          </tr>
-        <% else %>
-          <%# healths登録が1以上の月 %>
-          <% @admins_personal_healths.each do |admins_personal_health| %>
-            <% if admins_personal_health.date == f_day %>
-              <%# 日付が一致する場合 %>
-              <tr>
-                <td><%= f_day.day %>日</td>
-                <td class="<%= text_color_temp(admins_personal_health.temperature_morning) %>"><%= admins_personal_health.temperature_morning %></td>
-                <td class="<%= text_color_temp(admins_personal_health.temperature_night) %>"><%= admins_personal_health.temperature_night %></td>
-                <td class="<%= text_color(admins_personal_health.cough) %>"><%= admins_personal_health.cough %></td>
-                <td class="<%= text_color(admins_personal_health.dyspnea) %>"><%= admins_personal_health.dyspnea %></td>
-                <td class="<%= text_color(admins_personal_health.nasal) %>"><%= admins_personal_health.nasal %></td>
-                <td class="<%= text_color(admins_personal_health.throat) %>"><%= admins_personal_health.throat %></td>
-                <td class="<%= text_color(admins_personal_health.headache) %>"><%= admins_personal_health.headache %></td>
-                <td class="<%= text_color(admins_personal_health.diarrhea) %>"><%= admins_personal_health.diarrhea %></td>
-                <td class="<%= text_color(admins_personal_health.taste) %>"><%= admins_personal_health.taste %></td>
-                <td class="<%= text_color(admins_personal_health.smell) %>"><%= admins_personal_health.smell %></td>
-                <td><%= admins_personal_health.ather %></td>
-                <%# 行動履歴 %>
-                <td></td>
-                <td></td>
-                <%# link_to 'Show', admins_personal_health %>
-              </tr>
-              <% count = 0 %>
-              <% break %>
-            <% else %>
-              <%# 一致する日付がない場合 %>
-              <% count += 1 %>
-              <% if count == @admins_personal_healths.length %>
+      <tbody>
+        <% while f_day <= l_day do %>
+          <% if @admins_personal_healths.length == 0  %>
+            <%# healths登録がない月 %>
+            <tr>
+              <td><%= @user[0].email %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+          <% else %>
+            <%# healths登録が1以上の月 %>
+            <% @admins_personal_healths.each do |admins_personal_health| %>
+              <% if admins_personal_health.date == f_day %>
+                <%# 日付が一致する場合 %>
                 <tr>
-                  <td><%= f_day.day %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                  <td><%= f_day.day %>日</td>
+                  <td class="<%= text_color_temp(admins_personal_health.temperature_morning) %>"><%= admins_personal_health.temperature_morning %></td>
+                  <td class="<%= text_color_temp(admins_personal_health.temperature_night) %>"><%= admins_personal_health.temperature_night %></td>
+                  <td class="<%= text_color(admins_personal_health.cough) %>"><%= admins_personal_health.cough %></td>
+                  <td class="<%= text_color(admins_personal_health.dyspnea) %>"><%= admins_personal_health.dyspnea %></td>
+                  <td class="<%= text_color(admins_personal_health.nasal) %>"><%= admins_personal_health.nasal %></td>
+                  <td class="<%= text_color(admins_personal_health.throat) %>"><%= admins_personal_health.throat %></td>
+                  <td class="<%= text_color(admins_personal_health.headache) %>"><%= admins_personal_health.headache %></td>
+                  <td class="<%= text_color(admins_personal_health.diarrhea) %>"><%= admins_personal_health.diarrhea %></td>
+                  <td class="<%= text_color(admins_personal_health.taste) %>"><%= admins_personal_health.taste %></td>
+                  <td class="<%= text_color(admins_personal_health.smell) %>"><%= admins_personal_health.smell %></td>
+                  <td><%= admins_personal_health.ather %></td>
+                  <%# 行動履歴 %>
+                  <% if @users_actlogs.length == 0 %>
+                    <td>なし</td>
+                    <td>なし</td>
+                  <% else %>
+                    <% @users_actlogs.each do |users_actlog| %>
+                      <% if users_actlog.date == admins_personal_health.date %>
+                        <td>あり</td>
+                        <td><%= link_to '詳細'%></td>
+                      <% break %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
                 </tr>
                 <% count = 0 %>
+                <% break %>
+              <% else %>
+                <%# 一致する日付がない場合 %>
+                <% count += 1 %>
+                <% if count == @admins_personal_healths.length %>
+                  <tr>
+                    <td><%= f_day.day %>日</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                  </tr>
+                  <% count = 0 %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
+          <% f_day += 1 %>
         <% end %>
-        <% f_day += 1 %>
-      <% end %>
-    </tbody>
+      </tbody>
+    </table>
   </div>
 </div>
