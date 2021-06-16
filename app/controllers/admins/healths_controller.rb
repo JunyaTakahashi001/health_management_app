@@ -1,5 +1,5 @@
 class Admins::HealthsController < Admins::ApplicationController
-  before_action :set_admins_health, only: %i[ show edit update destroy ]
+  before_action :set_admins_health, only: %i[ edit update destroy ]
 
   # GET /admins/healths or /admins/healths.json
   def index
@@ -14,6 +14,12 @@ class Admins::HealthsController < Admins::ApplicationController
 
   # GET /admins/healths/1 or /admins/healths/1.json
   def show
+    # ユーザ名取得
+
+    # 行動履歴取得
+    @actlogid = params[:id]
+    @users_actlog = Actlog.where(id: @actlogid)
+    @users_actlogs = Actlog.where(date: @users_actlog[0].date).where(user_id: @users_actlog[0].user_id).order('date ASC')
   end
 
   # GET /admins/healths/new
