@@ -3,7 +3,6 @@
 <div class="d-flex align-items-center">
   <h1><%= @date.year %> 年 <%= @date.month %>月 <%= @date.day %>日 行動履歴登録一覧</h1>
   <div class="ml-auto">
-    <%= link_to '登録', new_users_actlog_path, class: 'btn btn-outline-dark' %>
     <%= link_to '戻る', :back, class: 'btn btn-outline-dark' %>
     <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark' %>
   </div>
