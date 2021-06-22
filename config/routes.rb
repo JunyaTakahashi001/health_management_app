@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :users do
-    resources :healths, only: [:index, :new, :edit]
-    resources :actlogs, only: [:index, :new, :edit]
+    resources :healths, only: [:index, :new, :edit, :create, :update]
+    resources :actlogs, only: [:index, :new, :edit, :create, :update]
   end
 
   namespace :admins do

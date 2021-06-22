@@ -1,5 +1,5 @@
 class Users::ActlogsController < Users::ApplicationController
-  before_action :set_users_actlog, only: %i[ show edit update destroy ]
+  before_action :set_users_actlog, only: %i[ edit update ]
 
   # GET /users/actlogs or /users/actlogs.json
   def index
@@ -7,10 +7,6 @@ class Users::ActlogsController < Users::ApplicationController
     # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     @actlogs = Actlog.where(date: @date.all_day).where(user_id: current_user.id).order('date ASC')
-  end
-
-  # GET /users/actlogs/1 or /users/actlogs/1.json
-  def show
   end
 
   # GET /users/actlogs/new
@@ -29,32 +25,24 @@ class Users::ActlogsController < Users::ApplicationController
     @path = "/users/actlogs/#{@actlog[:id]}"
   end
 
-  # POST /users/actlogs or /users/actlogs.json
+  # POST /users/actlogs
   def create
     @actlogs = ActlogCollection.new(actlog_params)
-    respond_to do |format|
-      if @actlogs.save
-        format.html { redirect_to users_healths_path, notice: "Actlog was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+
+    if @actlogs.save
+      redirect_to users_healths_path, notice: "行動履歴を登録しました。"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /users/actlogs/1 or /users/actlogs/1.json
+  # PATCH/PUT /users/actlogs/1
   def update
     actlog = Actlog.find(params[:id])
-    actlog.update(actlog_edit_params)
-
-    redirect_to users_healths_path
-  end
-
-  # DELETE /users/actlogs/1 or /users/actlogs/1.json
-  def destroy
-    @users_actlog.destroy
-    respond_to do |format|
-      format.html { redirect_to users_actlogs_url, notice: "Actlog was successfully destroyed." }
-      format.json { head :no_content }
+    if actlog.update(actlog_edit_params)
+      redirect_to users_healths_path, notice: "行動履歴を更新しました。"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

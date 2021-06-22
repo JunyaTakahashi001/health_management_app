@@ -18,7 +18,6 @@
 
     <%# 変数初期化 %>
     <% count = 1 %>
-
     
     <%= form_with(model: @actlogs, local: true, url: @path) do |f| %>
       <% @actlogs.collection.each do |actlog| %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="d-flex align-items-center">
   <h1><%= @date.year %> 年 <%= @date.month %>月 <%= @date.day %>日 行動履歴登録一覧</h1>
   <div class="ml-auto">
@@ -55,10 +53,7 @@
           <td><%= actlog.attendees %></td>
           <td><%= actlog.attendees_details %></td>
           <td><%= actlog.other %></td>
-          <td><%= link_to '編集', edit_users_actlog_path(actlog) %></td>
-          <%# link_to 'Show', users_actlog %>
-          <%# link_to 'Edit', edit_users_actlog_path(users_actlog) %>
-          <%# link_to 'Destroy', users_actlog, method: :delete, data: { confirm: 'Are you sure?' } %>    
+          <td><%= link_to '編集', edit_users_actlog_path(actlog) %></td> 
         </tr>
       <% end %>
     </tbody>

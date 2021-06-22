@@ -1,7 +1,7 @@
 class Users::HealthsController < Users::ApplicationController
-  before_action :set_users_health, only: %i[ show edit update destroy ]
+  before_action :set_users_health, only: %i[ edit update ]
 
-  # GET /users/healths or /users/healths.json
+  # GET /users/healths
   def index
     # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
@@ -9,10 +9,6 @@ class Users::HealthsController < Users::ApplicationController
   
     # 行動履歴取得
     @users_actlogs = Actlog.where(date: @month.all_month).where(user_id: current_user.id).order('date ASC')
-  end
-
-  # GET /users/healths/1 or /users/healths/1.json
-  def show
   end
 
   # GET /users/healths/new
@@ -28,35 +24,22 @@ class Users::HealthsController < Users::ApplicationController
     @path = "/users/healths/#{@health[:id]}"
   end
 
-  # POST /users/healths or /users/healths.json
+  # POST /users/healths
   def create
     @health = Health.new(health_params)
-    respond_to do |format|
-      if @health.save
-        format.html { redirect_to users_healths_path, notice: "Health was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @health.save
+      redirect_to users_healths_path, notice: "健康状態を登録しました。"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /users/healths/1 or /users/healths/1.json
+  # PATCH/PUT /users/healths/1
   def update
-    respond_to do |format|
-      if @health.update(health_params)
-        format.html { redirect_to users_healths_path, notice: "Health was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /users/healths/1 or /users/healths/1.json
-  def destroy
-    @users_health.destroy
-    respond_to do |format|
-      format.html { redirect_to users_healths_url, notice: "Health was successfully destroyed." }
-      format.json { head :no_content }
+    if @health.update(health_params)
+      redirect_to users_healths_path, notice: "健康状態を更新しました。"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
