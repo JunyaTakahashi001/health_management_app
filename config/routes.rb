@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admins do
-    resources :healths
-    resources :personal_healths
+    resources :healths, only: [:index, :show]
+    resources :personal_healths, only: [:index]
   end
 
   devise_for :admins, controllers: {
