@@ -5,12 +5,9 @@ class Admins::HealthsController < Admins::ApplicationController
     # クエリストリングがあればTimeオブジェクトに変換、ない場合は現在の時刻を取得
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     # 取得した時刻が含まれる日の範囲のデータを取得
-    @admins_healths = Health.where(date: @month.all_day).order('date ASC')
+    @admins_healths = User.left_joins(:healths).select("users.*, healths.*").where(healths: {date: @month.all_day}).order('date ASC')
     # 行動履歴取得
     @users_actlogs = Actlog.where(date: @month.all_day).order('date ASC')
-
-    #テーブル結合
-    @test = User.left_joins(:healths).select("users.*, healths.*").where(healths: {date: @month.all_day}).order('date ASC')
   end
 
   # GET /admins/healths/id
