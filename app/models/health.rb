@@ -1,5 +1,5 @@
 class Health < ApplicationRecord
-    # belongs_to :user,foreign_key: "id"
+    belongs_to :user
 
     # validates :date, presence: true
     # validates :temperature_morning, presence: true, length: { maximum: 4 }
